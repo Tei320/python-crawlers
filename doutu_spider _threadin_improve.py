@@ -63,7 +63,7 @@ def craw_image_links(url):
 
 
 # 生产者获取网页链接，追加图片链接和网页链接
-def procuder():
+def producer():
     while True:
         glock.acquire()
         if len(PAGE_URL_LIST) == 0:
