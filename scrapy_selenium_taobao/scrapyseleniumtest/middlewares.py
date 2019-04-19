@@ -12,6 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from scrapy.http import HtmlResponse
 from logging import getLogger
 
@@ -19,20 +20,22 @@ class SeleniumMiddleware():
     def __init__(self, timeout=None, service_args=[]):
         self.logger = getLogger(__name__)
         self.timeout = timeout
-        self.browser = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        self.browser = webdriver.Chrome(chrome_options=chrome_options)
         # self.browser = webdriver.PhantomJS(service_args=service_args)
         self.browser.set_window_size(1920, 1080)
         self.browser.set_page_load_timeout(self.timeout)
         self.wait = WebDriverWait(self.browser, self.timeout)
+
         self.browser.get('https://login.taobao.com/member/login.jhtml?redirectURL=http%3A%2F%2Fs.taobao.com%2Fsearch%3Fq%3DiPad')
         login_swith = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'login-switch')))
         login_swith.click()
         # 点击微博登录
-        time.sleep(3)
-        with open('ttt.text', 'w', encoding='utf-8') as fp:
-            fp.write(self.browser.page_source)
         weibo_login = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'weibo-login')))
         weibo_login.click()
+
         # 输入用户名
         username_input = self.wait.until(EC.presence_of_element_located((By.NAME, 'username')))
         username_input.send_keys('18106892890')
