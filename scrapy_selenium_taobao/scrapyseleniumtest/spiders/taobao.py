@@ -25,7 +25,7 @@ class TaobaoSpider(scrapy.Spider):
 
     def parse(self, response):
         products = response.xpath('//div[@id="mainsrp-itemlist"]//div[@class="items"]//div[contains(@class, "item")]')
-        print('************', response.meta.get('page'))
+        print('************当前抓取页面：', response.meta.get('page'))
         for product in products:
             item = ProductItem()
             item['price'] = ''.join(product.xpath('.//div[contains(@class, "price")]//text()').extract()).strip()
@@ -35,4 +35,4 @@ class TaobaoSpider(scrapy.Spider):
                 product.xpath('.//div[@class="pic"]//img[contains(@class, "img")]/@data-src').extract()).strip()
             item['deal'] = product.xpath('.//div[contains(@class, "deal-cnt")]//text()').extract_first()
             item['location'] = product.xpath('.//div[contains(@class, "location")]//text()').extract_first()
-            print(item)
+            yield item

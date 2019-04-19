@@ -64,9 +64,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scrapyseleniumtest.pipelines.ScrapyseleniumtestPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'scrapyseleniumtest.pipelines.MongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,10 +90,13 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 KEYWORD = 'iPad'
-MAX_PAGE = 3
+MAX_PAGE = 11
 
-WEIBO_NAME = '******'
-WEIBO_PASSWORD = '******'
+MONGO_URI = 'localhost:27017'
+MONGO_DB = 'taobao'
+
+WEIBO_USERNAME = '************'
+WEIBO_PASSWORD = '**************'
 
 SELENIUM_TIMEOUT = 20
-PHANTOMJS_SERVICE_ARGS = ['--load-images=false', '--disk-cache=true']
+
