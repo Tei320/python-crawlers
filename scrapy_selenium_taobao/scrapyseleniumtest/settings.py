@@ -92,8 +92,8 @@ DOWNLOADER_MIDDLEWARES = {
 KEYWORD = 'iPad'
 MAX_PAGE = 3
 
-WEIBO_NAME = '18106892890'
-WEIBO_PASSWORD = 'weibo_4882089'
+WEIBO_NAME = '******'
+WEIBO_PASSWORD = '******'
 
 SELENIUM_TIMEOUT = 20
 PHANTOMJS_SERVICE_ARGS = ['--load-images=false', '--disk-cache=true']

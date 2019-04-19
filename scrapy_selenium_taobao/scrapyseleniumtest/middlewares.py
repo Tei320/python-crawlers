@@ -38,10 +38,10 @@ class SeleniumMiddleware():
 
         # 输入用户名
         username_input = self.wait.until(EC.presence_of_element_located((By.NAME, 'username')))
-        username_input.send_keys('18106892890')
+        username_input.send_keys('******')
         # 输入密码
         password_input = self.browser.find_element_by_name('password')
-        password_input.send_keys('weibo_4882089')
+        password_input.send_keys('******')
         # 提交
         weibo_submit = self.browser.find_element_by_class_name('W_btn_g')
         weibo_submit.send_keys(Keys.ENTER)
